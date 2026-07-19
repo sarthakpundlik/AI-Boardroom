@@ -1,0 +1,88 @@
+# ============================================================
+# AI Boardroom — Backend Dependencies
+# Enterprise Multi-Agent Decision Intelligence Platform
+# ============================================================
+
+# --- Core Framework ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+pydantic==2.11.1
+pydantic-settings==2.7.1
+email-validator==2.2.0
+
+# --- Database ---
+sqlalchemy[asyncio]==2.0.36
+asyncpg==0.30.0
+alembic==1.14.1
+psycopg2-binary==2.9.10
+
+# --- Vector Store ---
+qdrant-client==1.12.1
+
+# --- Authentication ---
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.2.1
+httpx==0.28.1
+
+# --- AI Providers ---
+openai==1.58.1
+anthropic==0.42.0
+google-generativeai==0.8.4
+tiktoken==0.8.0
+langchain==0.3.13
+langchain-openai==0.3.0
+langgraph==0.2.60
+
+# --- RAG & Embeddings ---
+sentence-transformers==3.3.1
+
+# --- File Processing ---
+python-docx==1.1.2
+PyPDF2==3.0.1
+python-pptx==1.0.2
+openpyxl==3.1.5
+pandas==2.2.3
+python-magic-bin==0.4.14
+
+# --- Report Generation ---
+reportlab==4.2.5
+matplotlib==3.9.3
+
+# --- Task Queue ---
+celery[redis]==5.4.0
+redis==5.2.1
+
+# --- Storage ---
+boto3==1.36.1
+
+# --- WebSocket ---
+websockets==14.1
+
+# --- Monitoring & Logging ---
+structlog==24.4.0
+prometheus-client==0.21.1
+
+# --- Email ---
+aiosmtplib==3.0.2
+jinja2==3.1.5
+
+# --- Utilities ---
+python-dotenv==1.0.1
+orjson==3.10.13
+aiofiles==24.1.0
+tenacity==9.0.0
+
+# --- Testing ---
+pytest==8.3.4
+pytest-asyncio==0.25.0
+pytest-cov==6.0.0
+httpx==0.28.1
+factory-boy==3.3.1
+
+# --- Dev Tools ---
+black==24.10.0
+isort==5.13.2
+mypy==1.14.1
+ruff==0.8.6

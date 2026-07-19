@@ -1,0 +1,315 @@
+Backend folder structure
+
+Phase 1 — Backend Foundation
+Objective
+
+Build the project skeleton.
+
+backend/
+│
+├── app/
+│   │
+│   ├── api/
+│   │   └── v1/
+│   │       └── health.py
+│   │
+│   ├── core/
+│   │   ├── config.py
+│   │   ├── logging.py
+│   │   ├── constants.py
+│   │   ├── exceptions.py
+│   │   ├── dependencies.py
+│   │   └── security.py
+│   │
+│   ├── utils/
+│   │
+│   ├── middleware/
+│   │
+│   ├── tests/
+│   │
+│   └── main.py
+│
+├── docker/
+│
+├── scripts/
+│
+├── docs/
+│
+├── .env
+├── .env.example
+├── .gitignore
+├── docker-compose.yml
+├── Dockerfile
+├── pyproject.toml
+├── README.md
+└── requirements.txt
+
+Phase 2 — Authentication
+backend/
+│
+├── app/
+│   │
+│   ├── auth/
+│   │   ├── router.py
+│   │   ├── service.py
+│   │   ├── repository.py
+│   │   ├── models.py
+│   │   ├── schemas.py
+│   │   ├── jwt_handler.py
+│   │   ├── oauth.py
+│   │   ├── password.py
+│   │   └── email.py
+│   │
+│   ├── users/
+│   │   ├── router.py
+│   │   ├── service.py
+│   │   ├── repository.py
+│   │   ├── models.py
+│   │   └── schemas.py
+│   │
+│   └── core/
+
+Phase 3 — Database
+backend/
+│
+├── app/
+│   │
+│   ├── database/
+│   │   ├── postgres.py
+│   │   ├── qdrant.py
+│   │   ├── s3.py
+│   │   ├── session.py
+│   │   ├── base.py
+│   │   └── seed.py
+│   │
+│   ├── models/
+│   │
+│   ├── migrations/
+│   │
+│   ├── repositories/
+│   │
+│   └── schemas/
+
+Phase 4 — Project Management
+backend/
+│
+├── app/
+│   │
+│   ├── projects/
+│   │   ├── router.py
+│   │   ├── service.py
+│   │   ├── repository.py
+│   │   ├── models.py
+│   │   └── schemas.py
+│   │
+│   ├── sessions/
+│   │   ├── router.py
+│   │   ├── service.py
+│   │   ├── repository.py
+│   │   ├── models.py
+│   │   └── schemas.py
+
+Phase 5 — File Upload System
+backend/
+│
+├── app/
+│   │
+│   ├── uploads/
+│   │   ├── router.py
+│   │   ├── service.py
+│   │   ├── repository.py
+│   │   ├── extractor.py
+│   │   ├── validator.py
+│   │   ├── chunker.py
+│   │   ├── parser.py
+│   │   └── uploader.py
+│   │
+│   ├── storage/
+│   │   ├── local.py
+│   │   ├── s3.py
+│   │   └── manager.py
+
+
+Phase 6 — RAG System
+backend/
+│
+├── app/
+│   │
+│   ├── rag/
+│   │   ├── embeddings.py
+│   │   ├── chunking.py
+│   │   ├── retriever.py
+│   │   ├── reranker.py
+│   │   ├── vector_store.py
+│   │   ├── context.py
+│   │   └── pipeline.py
+│   │
+│   ├── memory/
+│   │   ├── shared_memory.py
+│   │   ├── session_memory.py
+│   │   ├── project_memory.py
+│   │   └── agent_memory.py
+
+
+Phase 7 — AI Core
+backend/
+│
+├── app/
+│   │
+│   ├── ai/
+│   │   ├── gateway.py
+│   │   ├── openai_client.py
+│   │   ├── gemini_client.py
+│   │   ├── anthropic_client.py
+│   │   ├── router.py
+│   │   ├── prompt_manager.py
+│   │   ├── tokenizer.py
+│   │   └── cost_tracker.py
+
+
+Phase 8 — Multi-Agent System
+backend/
+│
+├── app/
+│   │
+│   ├── agents/
+│   │   │
+│   │   ├── base/
+│   │   │   ├── base_agent.py
+│   │   │   ├── state.py
+│   │   │   ├── tools.py
+│   │   │   └── prompts.py
+│   │   │
+│   │   ├── ceo/
+│   │   ├── strategic/
+│   │   ├── business/
+│   │   ├── financial/
+│   │   ├── technical/
+│   │   ├── customer/
+│   │   ├── data/
+│   │   ├── risk/
+│   │   ├── devil/
+│   │   ├── reviewer/
+│   │   └── selector/
+│   │
+│   ├── orchestrator/
+│   │   ├── workflow.py
+│   │   ├── manager.py
+│   │   ├── scheduler.py
+│   │   ├── consensus.py
+│   │   └── discussion.py
+
+Phase 9 — Reports
+backend/
+│
+├── app/
+│   │
+│   ├── reports/
+│   │   ├── pdf.py
+│   │   ├── docx.py
+│   │   ├── ppt.py
+│   │   ├── templates/
+│   │   ├── charts.py
+│   │   └── exporter.py
+
+
+Phase 10 — Real-Time Collaboration
+backend/
+│
+├── app/
+│   │
+│   ├── websocket/
+│   │   ├── manager.py
+│   │   ├── events.py
+│   │   ├── rooms.py
+│   │   └── broadcaster.py
+│   │
+│   ├── notifications/
+│   │   ├── service.py
+│   │   ├── email.py
+│   │   ├── websocket.py
+│   │   └── push.py
+
+
+Phase 11 — Monitoring
+backend/
+│
+├── app/
+│   │
+│   ├── monitoring/
+│   │   ├── metrics.py
+│   │   ├── logger.py
+│   │   ├── traces.py
+│   │   ├── health.py
+│   │   └── profiler.py
+│   │
+│   ├── analytics/
+│   │   ├── dashboard.py
+│   │   ├── usage.py
+│   │   ├── reports.py
+│   │   └── costs.py
+
+
+Phase 12 — Production
+backend/
+│
+├── infrastructure/
+│   │
+│   ├── docker/
+│   ├── kubernetes/
+│   ├── nginx/
+│   ├── terraform/
+│   ├── github-actions/
+│   └── monitoring/
+│
+├── deployment/
+│
+├── backups/
+│
+└── scripts/
+
+
+Final Enterprise Structure
+
+After all phases are completed, your backend will look like this:
+
+backend/
+│
+├── app/
+│   ├── api/
+│   ├── auth/
+│   ├── users/
+│   ├── projects/
+│   ├── sessions/
+│   ├── uploads/
+│   ├── storage/
+│   ├── database/
+│   ├── models/
+│   ├── repositories/
+│   ├── schemas/
+│   ├── services/
+│   ├── rag/
+│   ├── memory/
+│   ├── ai/
+│   ├── agents/
+│   ├── orchestrator/
+│   ├── reports/
+│   ├── websocket/
+│   ├── notifications/
+│   ├── analytics/
+│   ├── monitoring/
+│   ├── middleware/
+│   ├── core/
+│   ├── utils/
+│   ├── tests/
+│   └── main.py
+│
+├── docs/
+├── infrastructure/
+├── deployment/
+├── scripts/
+├── Dockerfile
+├── docker-compose.yml
+├── pyproject.toml
+├── requirements.txt
+└── README.md
