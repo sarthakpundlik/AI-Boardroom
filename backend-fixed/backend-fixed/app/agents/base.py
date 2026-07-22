@@ -6,7 +6,7 @@ Base class for all specialized agents.
 from __future__ import annotations
 
 
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 from app.ai.llm import get_llm
 from app.ai.prompts import BASE_SYSTEM_INSTRUCTIONS
@@ -21,7 +21,7 @@ class BaseAgent:
         self.session_id = session_id
         self.role_name = role_name
         self.persona_desc = persona_desc
-        self.llm: ChatOpenAI = get_llm(temperature=0.2)
+        self.llm: ChatGoogleGenerativeAI = get_llm(temperature=0.2)
         self.memory = AgentMemory(session_id, role_name)
 
     async def analyze(

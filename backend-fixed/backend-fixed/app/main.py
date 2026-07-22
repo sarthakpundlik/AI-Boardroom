@@ -48,9 +48,9 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning("Qdrant initialization skipped (service unavailable): %s", e)
 
-    if not get_settings().OPENAI_API_KEY:
+    if not get_settings().GEMINI_API_KEY:
         logger.warning(
-            "OPENAI_API_KEY is not set in backend/.env — every boardroom "
+            "GEMINI_API_KEY is not set in backend/.env — every boardroom "
             "session will fail as soon as an agent tries to call the LLM. "
             "Add a real key and restart the server before creating a session."
         )

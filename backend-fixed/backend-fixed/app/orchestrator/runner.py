@@ -38,16 +38,16 @@ def _friendly_error_message(exc: Exception) -> str:
 
     if "api_key" in lowered or "api key" in lowered or "authentication" in lowered:
         return (
-            "The OpenAI API key on the server is missing or invalid. Add a "
-            "valid OPENAI_API_KEY to backend/.env, restart the backend, and "
+            "The Gemini API key on the server is missing or invalid. Add a "
+            "valid GEMINI_API_KEY to backend/.env, restart the backend, and "
             "start a new session."
         )
     if "rate limit" in lowered or "429" in text:
-        return "The OpenAI account hit a rate limit or ran out of quota. Check your OpenAI billing/usage and try again."
+        return "The Gemini account hit a rate limit or ran out of quota. Check your Gemini billing/usage and try again."
     if "timeout" in lowered or "timed out" in lowered:
         return "The AI model took too long to respond. This is usually temporary — try starting a new session."
     if "connection" in lowered or "connect" in lowered:
-        return "Couldn't reach the OpenAI API from the server. Check the server's internet connection and try again."
+        return "Couldn't reach the Gemini API from the server. Check the server's internet connection and try again."
 
     # Truncate defensively — raw provider errors can be very long.
     return text[:300] if text else "An unexpected error occurred while the board was deliberating."
@@ -102,10 +102,10 @@ async def run_boardroom_session(session_id: str, project_id: str, user_id: str) 
 
         try:
             settings = get_settings()
-            if not settings.OPENAI_API_KEY:
+            if not settings.GEMINI_API_KEY:
                 raise RuntimeError(
-                    "No OpenAI API key is configured on the server. Add a real "
-                    "OPENAI_API_KEY to backend/.env and restart the backend, "
+                    "No Gemini API key is configured on the server. Add a real "
+                    "GEMINI_API_KEY to backend/.env and restart the backend, "
                     "then start a new session."
                 )
 

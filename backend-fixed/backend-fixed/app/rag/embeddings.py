@@ -5,17 +5,17 @@ Generates vector embeddings for text chunks.
 
 from __future__ import annotations
 
-from langchain_openai import OpenAIEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 from app.core.config import get_settings
 
 
-def get_embedding_model() -> OpenAIEmbeddings:
-    """Get the OpenAI embeddings model."""
+def get_embedding_model() -> GoogleGenerativeAIEmbeddings:
+    """Get the Gemini embeddings model."""
     settings = get_settings()
-    return OpenAIEmbeddings(
-        openai_api_key=settings.OPENAI_API_KEY,
-        model="text-embedding-3-small",
+    return GoogleGenerativeAIEmbeddings(
+        google_api_key=settings.GEMINI_API_KEY,
+        model="models/text-embedding-004",
     )
 
 

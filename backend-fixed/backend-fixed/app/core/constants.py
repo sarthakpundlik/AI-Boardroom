@@ -217,16 +217,16 @@ class AIProvider(str, Enum):
 
 
 AI_MODEL_PRIORITY: list[AIProvider] = [
+    AIProvider.GEMINI,
     AIProvider.OPENAI,
     AIProvider.ANTHROPIC,
-    AIProvider.GEMINI,
 ]
 
 
 # ============================================================
 # RAG Configuration
 # ============================================================
-EMBEDDING_DIMENSION: int = 1536  # OpenAI text-embedding-3-small
+EMBEDDING_DIMENSION: int = 768  # Gemini text-embedding-004
 CHUNK_SIZE: int = 1000
 CHUNK_OVERLAP: int = 200
 MAX_CONTEXT_TOKENS: int = 500_000

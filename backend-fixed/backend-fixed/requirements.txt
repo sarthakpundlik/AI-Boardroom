@@ -28,12 +28,11 @@ bcrypt==4.2.1
 httpx==0.28.1
 
 # --- AI Providers ---
-openai==1.58.1
 anthropic==0.42.0
 google-generativeai==0.8.4
 tiktoken==0.8.0
 langchain==0.3.13
-langchain-openai==0.3.0
+langchain-google-genai==2.0.8
 langgraph==0.2.60
 
 
