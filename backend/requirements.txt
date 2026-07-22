@@ -21,7 +21,7 @@ psycopg2-binary==2.9.10
 qdrant-client==1.12.1
 
 # --- Authentication ---
-python-jose[cryptography]==3.3.0
+PyJWT==2.9.0
 passlib[bcrypt]==1.7.4
 bcrypt==4.2.1
 httpx==0.28.1

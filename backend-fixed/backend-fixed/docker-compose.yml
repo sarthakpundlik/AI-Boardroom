@@ -1,0 +1,114 @@
+# ============================================================
+# AI Boardroom — Docker Compose
+# Full development stack
+# ============================================================
+
+version: "3.9"
+
+services:
+  # --- Backend API ---
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai-boardroom-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - upload_data:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+    command: >
+      uvicorn app.main:app
+      --host 0.0.0.0
+      --port 8000
+      --reload
+    networks:
+      - ai-boardroom-net
+
+  # --- Celery Worker ---
+  celery-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai-boardroom-celery
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - upload_data:/app/uploads
+    depends_on:
+      - redis
+      - postgres
+    command: >
+      celery -A celery_app worker
+      --loglevel=info
+      --concurrency=4
+    networks:
+      - ai-boardroom-net
+
+  # --- PostgreSQL ---
+  postgres:
+    image: postgres:16-alpine
+    container_name: ai-boardroom-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ai_boardroom}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_DB: ${POSTGRES_DB:-ai_boardroom}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ai_boardroom"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-boardroom-net
+
+  # --- Redis ---
+  redis:
+    image: redis:7-alpine
+    container_name: ai-boardroom-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ai-boardroom-net
+
+  # --- Qdrant Vector Store ---
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: ai-boardroom-qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - ai-boardroom-net
+
+volumes:
+  postgres_data:
+  redis_data:
+  qdrant_data:
+  upload_data:
+
+networks:
+  ai-boardroom-net:
+    driver: bridge

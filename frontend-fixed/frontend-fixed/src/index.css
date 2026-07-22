@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* ---- Light mode: white / black / grey base + deep blue & forest green accents ---- */
+  --base: 244 246 249;          /* #F4F6F9 page background */
+  --surface: 255 255 255;       /* glass panel tint source */
+  --ink: 16 20 26;              /* #10141A near-black text */
+  --muted: 92 101 115;          /* #5C6573 grey text */
+  --line: 15 23 42;             /* border tint source, used at low alpha */
+  --accent-blue: 16 58 107;     /* #103A6B deep navy */
+  --accent-green: 21 110 82;    /* #156E52 forest green */
+  --accent-warm: 200 120 40;    /* unused in light, kept for consistency */
+  --ring-color: 16 58 107;
+
+  --mesh-1: 16 58 107;
+  --mesh-2: 21 110 82;
+  --glass-alpha: 0.62;
+  --glass-border-alpha: 0.5;
+  --scrollbar: 180 186 196;
+}
+
+.dark {
+  /* ---- Dark mode: black / white / grey base + light orange + light blue & green accents ---- */
+  --base: 8 9 11;                /* #08090B near-black page */
+  --surface: 255 255 255;        /* used at low alpha for glass */
+  --ink: 244 245 247;            /* #F4F5F7 near-white text */
+  --muted: 154 163 175;          /* #9AA3AF grey text */
+  --line: 255 255 255;
+  --accent-blue: 111 195 255;    /* #6FC3FF light blue */
+  --accent-green: 74 222 156;    /* #4ADE9C light green */
+  --accent-warm: 255 166 92;     /* #FFA65C light orange */
+  --ring-color: 255 166 92;
+
+  --mesh-1: 111 195 255;
+  --mesh-2: 255 166 92;
+  --glass-alpha: 0.06;
+  --glass-border-alpha: 0.12;
+  --scrollbar: 63 68 77;
+}
+
+* {
+  border-color: rgb(var(--line) / 0.08);
+}
+
+html, body {
+  background-color: rgb(var(--base));
+  color: rgb(var(--ink));
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: rgb(var(--accent-blue) / 0.25);
+}
+
+/* Ambient mesh backdrop used behind glass surfaces */
+.mesh-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: rgb(var(--base));
+}
+.mesh-bg::before,
+.mesh-bg::after {
+  content: "";
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.16;
+}
+.mesh-bg::before {
+  background: rgb(var(--mesh-1));
+  top: -15%;
+  left: -10%;
+}
+.mesh-bg::after {
+  background: rgb(var(--mesh-2));
+  bottom: -20%;
+  right: -10%;
+}
+
+/* Core glassmorphism surface */
+.glass {
+  background: rgb(var(--surface) / var(--glass-alpha));
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgb(var(--line) / var(--glass-border-alpha));
+}
+
+.glass-heavy {
+  background: rgb(var(--surface) / calc(var(--glass-alpha) + 0.08));
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgb(var(--line) / var(--glass-border-alpha));
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, rgb(var(--accent-blue)), rgb(var(--accent-green)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, rgb(var(--muted)) 0%, rgb(var(--ink)) 50%, rgb(var(--muted)) 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--scrollbar) / 0.6);
+  border-radius: 8px;
+  border: 2px solid rgb(var(--base));
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Focus visibility (accessibility) */
+:focus-visible {
+  outline: 2px solid rgb(var(--accent-blue));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
